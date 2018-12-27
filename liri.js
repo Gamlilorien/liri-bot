@@ -5,6 +5,7 @@ var keys = require("./keys.js");
 //requires for the npm modules
 var Spotify = require("node-spotify-api");
 var axios = require("axios");
+var moment = require("moment");
 
 //we should then be able to access your keys information like so
 //keys represents the file? and spotify represents the object?
@@ -46,13 +47,14 @@ function concertThis() {
         var r = response.data;
         var i;
         var itemCount = r.length;
-        console.log(itemCount);
-        console.log("\n------------------------------\nArtist Concert Search Results\n------------------------------\n");
+        console.log("\n-----------------------------------\n" +artist +" Concert Search Results\n-----------------------------------");
+        console.log("Upcoming Events Found: " +itemCount +"\n");
         //now loop through items in array
         for (i = 0; i < itemCount; i++) {
             var item = r[i];
             var venue = item.venue.name;
             var location = item.venue.city +" " +item.venue.region;
+            //need to use moment.js to pretify the date result for users ie MM/DD/YYYY HH:MM
             var date = item.datetime;
             console.log(venue);
             console.log(location);
@@ -91,7 +93,7 @@ function spotifySong() {
       var album = "Album: " +r.album.name;
       var song = "Song: " +r.name;
       var songURL = "Spotify URL: " +r.external_urls.spotify
-    console.log("\n------------------------------\nSpotify Song Search Results\n------------------------------");
+    console.log("\n-----------------------------------\nSpotify Song Search Results\n-----------------------------------");
     console.log(artist);
     console.log(song);
     console.log(album);
