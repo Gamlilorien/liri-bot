@@ -37,6 +37,49 @@ switch (command) {
 //`movie-this`
 //`do-what-it-says`
 
+//`concert-this`
+function concertThis() {
+    var artist = search;
+    axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp&date=upcoming")
+    .then(function(response) {
+        // If the axios was successful then log response
+        var r = response.data;
+        var i;
+        var itemCount = r.length;
+        console.log(itemCount);
+        console.log("\n------------------------------\nArtist Concert Search Results\n------------------------------\n");
+        //now loop through items in array
+        for (i = 0; i < itemCount; i++) {
+            var item = r[i];
+            var venue = item.venue.name;
+            var location = item.venue.city +" " +item.venue.region;
+            var date = item.datetime;
+            console.log(venue);
+            console.log(location);
+            console.log(date +"\n");
+        }
+
+    })
+    .catch(function(error) {
+        if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an object that comes back with details pertaining to the error that occurred.
+        console.log(error.request);
+        } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error", error.message);
+        }
+        console.log(error.config);
+    });
+}
+
+
 //`spotify-this-song`
 function spotifySong() {
     var title = search;
@@ -48,7 +91,7 @@ function spotifySong() {
       var album = "Album: " +r.album.name;
       var song = "Song: " +r.name;
       var songURL = "Spotify URL: " +r.external_urls.spotify
-    console.log("\n----------------------------\nSpotify Song Search Results\n----------------------------");
+    console.log("\n------------------------------\nSpotify Song Search Results\n------------------------------");
     console.log(artist);
     console.log(song);
     console.log(album);
@@ -58,5 +101,3 @@ function spotifySong() {
     console.log(err);
   });
 }
-
-spotifySong();
