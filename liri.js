@@ -55,7 +55,8 @@ function concertThis() {
             var venue = item.venue.name;
             var location = item.venue.city +" " +item.venue.region;
             //need to use moment.js to pretify the date result for users ie MM/DD/YYYY HH:MM
-            var date = item.datetime;
+            var date = moment(item.datetime).format('ddd, L LT');
+            
             console.log(venue);
             console.log(location);
             console.log(date +"\n");
@@ -79,7 +80,7 @@ function concertThis() {
         }
         console.log(error.config);
     });
-}
+};
 
 
 //`spotify-this-song`
@@ -102,4 +103,58 @@ function spotifySong() {
   .catch(function(err) {
     console.log(err);
   });
+};
+
+//`movie-this`
+function movieThis() {
+    //now determine the movie to search for. Use user input if any, otherwise default to Mr Nobody
+    if (search === undefined) {
+        var movie = 'Mr. Nobody';
+    }else {
+        var movie = search;
+    }
+    
+    var queryURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
+    axios.get(queryURL)
+    .then(function(response) {
+        // If the axios was successful then log response
+        var r = response.data;
+        console.log("\n-----------------------------------\n" +" Movie Search Results\n-----------------------------------");
+        //console.log(r);
+
+        var title = r.Title;
+        var year = r.Year;
+        var imdb = r.Ratings[0].Value;
+        var rottenT = r.Ratings[1].Value;
+        var country = r.Country;
+        var language = r.Language;
+        var plot = r.Plot;
+        var actors = r.Actors;
+
+        console.log("Movie Title: " +title);
+        console.log("Year Made: " +year);
+        console.log("IMDB Score: " +imdb);
+        console.log("Rotten Tomatoes: " +rottenT);
+        console.log("Country Filmed: " +country);
+        console.log("Language: " +language +"\n");
+        console.log("Actors: " +actors +"\n");
+        console.log("Plot: " +plot +"\n");
+    })
+    .catch(function(error) {
+        if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an object that comes back with details pertaining to the error that occurred.
+        console.log(error.request);
+        } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error", error.message);
+        }
+        console.log(error.config);
+    });
 }
