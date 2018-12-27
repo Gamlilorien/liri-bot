@@ -1,4 +1,5 @@
-console.log('this is loaded');
+//This should run when spotify call is run in the liri.js file. Disabled now that it's working
+//console.log('this is loaded');
 
 exports.spotify = {
   id: process.env.SPOTIFY_ID,
