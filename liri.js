@@ -6,6 +6,7 @@ var keys = require("./keys.js");
 var Spotify = require("node-spotify-api");
 var axios = require("axios");
 var moment = require("moment");
+var fs = require("fs");
 
 //we should then be able to access your keys information like so
 //keys represents the file? and spotify represents the object?
@@ -15,23 +16,29 @@ var spotify = new Spotify(keys.spotify);
 var command = process.argv[2];
 var search = process.argv[3];
 
-switch (command) {
-    case "concert-this":
-    concertThis();
-    break;
+//converted to a function so it can be reused
+function executeCommand() {
+    switch (command) {
+        case "concert-this":
+        concertThis();
+        break;
 
-    case "spotify-this-song":
-    spotifySong();
-    break;
+        case "spotify-this-song":
+        spotifySong();
+        break;
 
-    case "movie-this":
-    movieThis();
-    break;
+        case "movie-this":
+        movieThis();
+        break;
 
-    case "do-what-it-says":
-    doIt();
-    break;
+        case "do-what-it-says":
+        doIt();
+        break;
+    }
 }
+
+//now declare this function for file load
+executeCommand();
 //* Accept the following user commands
 //`concert-this`
 //`spotify-this-song`
@@ -157,4 +164,19 @@ function movieThis() {
         }
         console.log(error.config);
     });
-}
+};
+
+//`do-what-it-says`
+function doIt() {
+    fs.readFile("random.txt", "utf8", function(err, data) {
+        if (err) {
+            return console.log(err);
+        }
+        //value from text tile will be command,search so we need to seperate them
+        var output = data.split(",");
+        command = output[0];
+        search = output[1];
+        //now we run the command
+        executeCommand();
+    })
+};
