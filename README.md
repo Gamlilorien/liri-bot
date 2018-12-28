@@ -27,7 +27,7 @@ In your bash or terminal window simply type:
 
       node liri.js command-name 'search string'
 
-Where the **command-name** is literally one of the four commands listed above (no spaces or quotes) and the **search string** is either an Artist, Movie Title, or Songe name etc enclosed in single quotes.
+Where the **command-name** is literally one of the four commands listed above (no spaces or quotes) and the **search string** is either an Artist, Movie Title, or Song name etc enclosed in single quotes.
 
 ## Visual Examples of the four main LIRI commands:
 
@@ -37,7 +37,7 @@ Where the **command-name** is literally one of the four commands listed above (n
       * Search String: any Band or Artist Name.
       * Example:
       
-            node liri.js concert-this 'Incubus'
+            node liri.js concert-this 'incubus'
 
       ![liri-bot](images/liri_concert-this_1.gif)
 
@@ -80,14 +80,16 @@ Where the **command-name** is literally one of the four commands listed above (n
 
       ![liri-bot](images/liri_movie-this-default.gif)
 
-      * Sample Result:
-
-      ![liri-bot](images/do.png)
-
   4. **do-what-it-says**
-      * This command uses the Spotify Web API to search for song details.
+      * This command takes text saved within a local random.txt file and uses its contents as parameters to run a command. In this example the text file contains:
+
+            spotify-this-song,"I Want it That Way"
+
       * **Command:** do-what-it-says
       * **Search String:** None.
+      * Example:
+
+            node liri.js do-what-it-says
 
       ![liri-bot](images/liri_do-what-it-says.gif)
 
