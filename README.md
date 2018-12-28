@@ -9,6 +9,8 @@ In this project I built a simple command-line node application that recieves use
 
 AI, machine learning, and useful intepertation of user input and extraploating is becoming more and more common place. This app uses Node.js (a server-size Javascript command-line enviorment) to take user input and search different web sources and local log files using web APIs and NPM node modules.
 
+- - - 
+
 ### How to Use
 
 LIRI accepts four differnt types of commands for user input.
@@ -33,11 +35,15 @@ Where the **command-name** is literally one of the four commands listed above (n
       * This command uses the Bands In Town Web API to search for upcoming concerts.
       * Command: **concert-this**
       * Search String: any Band or Artist Name.
-        * Example:
+      * Example:
       
             node liri.js concert-this 'Incubus'
 
       ![liri-bot](images/liri_concert-this_1.gif)
+
+      * Sample Result:
+
+      ![liri-bot](images/concert.png)
 
   2. **spotify-this-song**
       * This command uses the Spotify Web API to search for song details.
@@ -49,6 +55,10 @@ Where the **command-name** is literally one of the four commands listed above (n
 
       ![liri-bot](images/liri_spotify.gif)
 
+      * Sample Result:
+
+      ![liri-bot](images/spotify.png)
+
   3. **movie-this**
       * This command uses the OMDB Web API to search for movie details.
       * Command: **movie-this**
@@ -59,6 +69,10 @@ Where the **command-name** is literally one of the four commands listed above (n
 
       ![liri-bot](images/liri_movie-this.gif)
 
+      * Sample Result:
+
+      ![liri-bot](images/movie.png)
+
       * If the search string is omitted then this command defaults to searching for the movie Mr. Nobody!
       * Example:
       
@@ -66,12 +80,18 @@ Where the **command-name** is literally one of the four commands listed above (n
 
       ![liri-bot](images/liri_movie-this-default.gif)
 
+      * Sample Result:
+
+      ![liri-bot](images/do.png)
+
   4. **do-what-it-says**
       * This command uses the Spotify Web API to search for song details.
       * **Command:** do-what-it-says
       * **Search String:** None.
 
       ![liri-bot](images/liri_do-what-it-says.gif)
+
+- - -
 
 ### Technology Used and Depencencies
 
@@ -81,7 +101,7 @@ LIRI is designed specififally to search Spotify for songs, Bands in Town for con
 (NOTE: if cloning this project, you will need to 'npm install NAME-OF-MODULE' for each of the following modules where NAME-OF-MODULE is 'Node', 'Axios', 'Moment', or 'DotEnv' respectively see: https://docs.npmjs.com for details ).
 
   Required NPM Node Modules:
-   * [Node] (https://www.npmjs.com/package/node) - for back-end command-line javascript interface.
+   * [Node](https://www.npmjs.com/package/node) - for back-end command-line javascript interface.
 
    * [Axios](https://www.npmjs.com/package/axios) - for javascript based api calls used for the OMBD API and Bands In Town API respectively.
 
@@ -114,99 +134,9 @@ node_modules
 .DS_Store
 .env
 ```
-   
+- - - 
+
 ## Submission Guide
-
-
-
-
-
-
-5. Make a file called `random.txt`.
-
-   * Inside of `random.txt` put the following in with no extra characters or white space:
-
-     * spotify-this-song,"I Want it That Way"
-
-
-
-9. Make it so liri.js can take in one of the following commands:
-
-   * `concert-this`
-
-   * `spotify-this-song`
-
-   * `movie-this`
-
-   * `do-what-it-says`
-
-### What Each Command Should Do
-
-1. `node liri.js concert-this <artist/band name here>`
-
-   * This will search the Bands in Town Artist Events API (`"https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"`) for an artist and render the following information about each event to the terminal:
-
-     * Name of the venue
-
-     * Venue location
-
-     * Date of the Event (use moment to format this as "MM/DD/YYYY")
-
-2. `node liri.js spotify-this-song '<song name here>'`
-
-   * This will show the following information about the song in your terminal/bash window
-
-     * Artist(s)
-
-     * The song's name
-
-     * A preview link of the song from Spotify
-
-     * The album that the song is from
-
-   * If no song is provided then your program will default to "The Sign" by Ace of Base.
-
-   * You will utilize the [node-spotify-api](https://www.npmjs.com/package/node-spotify-api) package in order to retrieve song information from the Spotify API.
-
-   * The Spotify API requires you sign up as a developer to generate the necessary credentials. You can follow these steps in order to generate a **client id** and **client secret**:
-
-   * Step One: Visit <https://developer.spotify.com/my-applications/#!/>
-
-   * Step Two: Either login to your existing Spotify account or create a new one (a free account is fine) and log in.
-
-   * Step Three: Once logged in, navigate to <https://developer.spotify.com/my-applications/#!/applications/create> to register a new application to be used with the Spotify API. You can fill in whatever you'd like for these fields. When finished, click the "complete" button.
-
-   * Step Four: On the next screen, scroll down to where you see your client id and client secret. Copy these values down somewhere, you'll need them to use the Spotify API and the [node-spotify-api package](https://www.npmjs.com/package/node-spotify-api).
-
-3. `node liri.js movie-this '<movie name here>'`
-
-   * This will output the following information to your terminal/bash window:
-
-     ```
-       * Title of the movie.
-       * Year the movie came out.
-       * IMDB Rating of the movie.
-       * Rotten Tomatoes Rating of the movie.
-       * Country where the movie was produced.
-       * Language of the movie.
-       * Plot of the movie.
-       * Actors in the movie.
-     ```
-
-   * If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
-
-     * If you haven't watched "Mr. Nobody," then you should: <http://www.imdb.com/title/tt0485947/>
-
-     * It's on Netflix!
-
-   * You'll use the `axios` package to retrieve data from the OMDB API. Like all of the in-class activities, the OMDB API requires an API key. You may use `trilogy`.
-
-4. `node liri.js do-what-it-says`
-
-   * Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
-
-     * It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
-
      * Edit the text in random.txt to test out the feature for movie-this and concert-this.
 
 ### BONUS
@@ -216,37 +146,8 @@ node_modules
 * Make sure you append each command you run to the `log.txt` file. 
 
 * Do not overwrite your file each time you run a command.
-
-### Reminder: Submission on BCS
-
-* Please submit the link to the Github Repository!
-
-- - -
-
-### Minimum Requirements
-
-Attempt to complete homework assignment as described in instructions. If unable to complete certain portions, please pseudocode these portions to describe what remains to be completed. Adding a README.md as well as adding this homework to your portfolio are required as well and more information can be found below.
-
-- - -
-
-### Create a README.md
-
-Add a `README.md` to your repository describing the project. Here are some resources for creating your `README.md`. Here are some resources to help you along the way:
-
-* [About READMEs](https://help.github.com/articles/about-readmes/)
-
-* [Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
-
 - - -
 
 ### Add To Your Portfolio
 
 After completing the homework please add the piece to your portfolio. Make sure to add a link to your updated portfolio in the comments section of your homework so the TAs can easily ensure you completed this step when they are grading the assignment. To receive an 'A' on any assignment, you must link to it from your portfolio.
-
-- - -
-
-### One More Thing
-
-If you have any questions about this project or the material we have covered, please post them in the community channels in slack so that your fellow developers can help you! If you're still having trouble, you can come to office hours for assistance from your instructor and TAs.
-
-**Good Luck!**
