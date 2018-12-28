@@ -1,81 +1,126 @@
-# LIRI Bot
+# L.I.R.I. Bot
+## A _Language_ Interpertation and Recognition Interface
 
 ### Overview
 
-In this assignment, you will make LIRI. LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and Recognition Interface, LIRI is a _Language_ Interpretation and Recognition Interface. LIRI will be a command line node app that takes in parameters and gives you back data.
+In this project I built a simple command-line node application that recieves user commands and search terms and output revelant data in the console.
 
-### Before You Begin
+### Purpose
 
-1. LIRI will search Spotify for songs, Bands in Town for concerts, and OMDB for movies.
+AI, machine learning, and useful intepertation of user input and extraploating is becoming more and more common place. This app uses Node.js (a server-size Javascript command-line enviorment) to take user input and search different web sources and local log files using web APIs and NPM node modules.
 
-2. Make a new GitHub repository called liri-node-app and clone it to your computer.
+### How to Use
 
-3. To retrieve the data that will power this app, you'll need to send requests using the `axios` package to the Bands in Town, Spotify and OMDB APIs. You'll find these Node packages crucial for your assignment.
+LIRI accepts four differnt types of commands for user input.
 
-   * [Node-Spotify-API](https://www.npmjs.com/package/node-spotify-api)
+   * **concert-this** 
 
-   * [Axios](https://www.npmjs.com/package/axios)
+   * **spotify-this-song**
 
-     * You'll use Axios to grab data from the [OMDB API](http://www.omdbapi.com) and the [Bands In Town API](http://www.artists.bandsintown.com/bandsintown-api)
+   * **movie-this**
 
-   * [Moment](https://www.npmjs.com/package/moment)
+   * **do-what-it-says**
 
-   * [DotEnv](https://www.npmjs.com/package/dotenv)
-   
-## Submission Guide
+In your bash or terminal window simply type:
 
-Create and use a standard GitHub repository. As this is a CLI App, it cannot be deployed to GitHub pages or Heroku. This time you'll need to include screenshots, a GIF, and/or a video showing us that you have the app working with no bugs. You can include these screenshots/GIFs or a link to a video in a `README.md` file.
+      node liri.js command-name 'search string'
 
-* Include screenshots (or a GIF/Video) of the typical user flow of your application. Make sure to include the use of Spotify, Bands in Town, and OMDB.
+Where the **command-name** is literally one of the four commands listed above (no spaces or quotes) and the **search string** is either an Artist, Movie Title, or Songe name etc enclosed in single quotes.
 
-* Include any other screenshots you deem necessary to help someone who has never been introduced to your application understand the purpose and function of it. This is how you will communicate to potential employers/other developers in the future what you built and why, and to show how it works.
+## Visual Examples of the four main LIRI commands:
 
-* Because screenshots (and well-written READMEs) are extremely important in the context of GitHub, this will be part of the grading.
+  1. **concert-this**
+      * This command uses the Bands In Town Web API to search for upcoming concerts.
+      * Command: **concert-this**
+      * Search String: any Band or Artist Name.
+        * Example:
+      
+            node liri.js concert-this 'Incubus'
 
-If you haven't written a markdown file yet, [click here for a rundown](https://guides.github.com/features/mastering-markdown/), or just take a look at the raw file of these instructions.
+      ![liri-bot](images/liri_concert-this_1.gif)
 
-### Submission on BCS
+  2. **spotify-this-song**
+      * This command uses the Spotify Web API to search for song details.
+      * Command: **spotify-this-song**
+      * Search String: any Song Name.
+      * Example:
+      
+            node liri.js spotify-this-song 'Black Magic Woman'
 
-* Please submit the link to the Github Repository!
+      ![liri-bot](images/liri_spotify.gif)
 
-### Instructions
+  3. **movie-this**
+      * This command uses the OMDB Web API to search for movie details.
+      * Command: **movie-this**
+      * Search String: optional*, otherwise any Movie Title or Name.
+      * Example:
+      
+            node liri.js movie-this 'Fifth Element'
 
-1. Navigate to the root of your project and run `npm init -y` &mdash; this will initialize a `package.json` file for your project. The `package.json` file is required for installing third party npm packages and saving their version numbers. If you fail to initialize a `package.json` file, it will be troublesome, and at times almost impossible for anyone else to run your code after cloning your project.
+      ![liri-bot](images/liri_movie-this.gif)
 
-2. Make a `.gitignore` file and add the following lines to it. This will tell git not to track these files, and thus they won't be committed to Github.
+      * If the search string is omitted then this command defaults to searching for the movie Mr. Nobody!
+      * Example:
+      
+            node liri.js movie-this
+
+      ![liri-bot](images/liri_movie-this-default.gif)
+
+  4. **do-what-it-says**
+      * This command uses the Spotify Web API to search for song details.
+      * **Command:** do-what-it-says
+      * **Search String:** None.
+
+      ![liri-bot](images/liri_do-what-it-says.gif)
+
+### Technology Used and Depencencies
+
+LIRI is designed specififally to search Spotify for songs, Bands in Town for concerts, OMDB for movies, and NPM fs (included with the node.js install) for a log file saved to the local file system.
+
+1. Step One: install NPM Modules
+(NOTE: if cloning this project, you will need to 'npm install NAME-OF-MODULE' for each of the following modules where NAME-OF-MODULE is 'Node', 'Axios', 'Moment', or 'DotEnv' respectively see: https://docs.npmjs.com for details ).
+
+  Required NPM Node Modules:
+   * [Node] (https://www.npmjs.com/package/node) - for back-end command-line javascript interface.
+
+   * [Axios](https://www.npmjs.com/package/axios) - for javascript based api calls used for the OMBD API and Bands In Town API respectively.
+
+   * [Moment](https://www.npmjs.com/package/moment) - for formatting the returned concert time search results.
+
+   * [DotEnv](https://www.npmjs.com/package/dotenv) - for loading enviorment variables from .env files used to keep your individual Spotify API credentials private. To use this code you will need to create your OWN .env file in your root directory with the following details:
+
+    ```js
+    # Spotify API keys
+
+    SPOTIFY_ID=your-spotify-id
+    SPOTIFY_SECRET=your-spotify-secret
+
+    ```
+    Where the 'spotify-id' and 'your-spotify-secret' are personal keys obtained from your own Spotify Developer account.
+    
+2. Step Two: Get Your Own Spotify App API keys
+
+  * Login or create a free spotify developer account by visiting: <https://developer.spotify.com/my-applications/#!/>
+
+  * Then go here to create your own API app credentials: <https://developer.spotify.com/my-applications/#!/applications/create>.
+
+  * Update the .env text file you created to your local directory with these new key values.
+
+3. Step Three: GitIgnore
+If you are using Git as your version tracking tool, you might want to also create a `.gitignore` file and add the following lines to it. This will tell git not to track these files, and thus they won't be committed to Github.
 
 ```
 node_modules
 .DS_Store
 .env
 ```
+   
+## Submission Guide
 
-3. Make a JavaScript file named `keys.js`.
 
-* Inside keys.js your file will look like this:
 
-```js
-console.log('this is loaded');
 
-exports.spotify = {
-  id: process.env.SPOTIFY_ID,
-  secret: process.env.SPOTIFY_SECRET
-};
-```
 
-4. Next, create a file named `.env`, add the following to it, replacing the values with your API keys (no quotes) once you have them:
-
-```js
-# Spotify API keys
-
-SPOTIFY_ID=your-spotify-id
-SPOTIFY_SECRET=your-spotify-secret
-
-```
-
-* This file will be used by the `dotenv` package to set what are known as environment variables to the global `process.env` object in node. These are values that are meant to be specific to the computer that node is running on, and since we are gitignoring this file, they won't be pushed to github &mdash; keeping our API key information private.
-
-* If someone wanted to clone your app from github and run it themselves, they would need to supply their own `.env` file for it to work.
 
 5. Make a file called `random.txt`.
 
@@ -83,21 +128,7 @@ SPOTIFY_SECRET=your-spotify-secret
 
      * spotify-this-song,"I Want it That Way"
 
-6. Make a JavaScript file named `liri.js`.
 
-7. At the top of the `liri.js` file, add code to read and set any environment variables with the dotenv package:
-
-```js
-require("dotenv").config();
-```
-
-8. Add the code required to import the `keys.js` file and store it in a variable.
-  
-* You should then be able to access your keys information like so
-
-  ```js
-  var spotify = new Spotify(keys.spotify);
-  ```
 
 9. Make it so liri.js can take in one of the following commands:
 
