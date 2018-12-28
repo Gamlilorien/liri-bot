@@ -138,18 +138,9 @@ node_modules
 ```
 - - - 
 
-## Submission Guide
-     * Edit the text in random.txt to test out the feature for movie-this and concert-this.
+### Future Development
 
-### BONUS
+* Eventually I would like to log the local all of users input values to a local `log.txt` file in addition to simply displaying in their terminal/bash window as it does currently.
 
-* In addition to logging the data to your terminal/bash window, output the data to a .txt file called `log.txt`.
-
-* Make sure you append each command you run to the `log.txt` file. 
-
-* Do not overwrite your file each time you run a command.
+* This would be done in such a way that each user command gets appended to the `log.txt` file without overwriting any existing values. 
 - - -
-
-### Add To Your Portfolio
-
-After completing the homework please add the piece to your portfolio. Make sure to add a link to your updated portfolio in the comments section of your homework so the TAs can easily ensure you completed this step when they are grading the assignment. To receive an 'A' on any assignment, you must link to it from your portfolio.
