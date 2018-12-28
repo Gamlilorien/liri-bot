@@ -176,6 +176,7 @@ function doIt() {
         var output = data.split(",");
         command = output[0];
         search = output[1];
+        console.log(search);
         //now we run the command
         executeCommand();
     })
